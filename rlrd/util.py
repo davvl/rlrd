@@ -145,7 +145,7 @@ def partial_from_args(func: Union[str, callable], kwargs: Dict[str, str]):
     keywords = {}
     for key in keys:
         params = inspect.signature(func).parameters
-        assert key in params, f"'{key}' is not a valid parameter of {func}. Valid parameters are {tuple(params.keys())}."
+        assert key in params, f"{key}' is not a valid parameter of {func}. Valid parameters are {tuple(params.keys())}."
         param = params[key]
         value = kwargs.get(key, param.default)
         if param.annotation is type:

@@ -31,7 +31,12 @@ class Agent(rlrd.sac.Agent):
                 self.act_buf_size = 1
 
         assert self.device is not None
-        device = self.device  # or ("cuda" if torch.cuda.is_available() else "cpu")
+        print('ff device={}'.format(self.device))
+
+        device = ("cuda" if torch.cuda.is_available() else "cpu")
+        self.device = device
+        print('ff device={}'.format(device))
+
         model = self.Model(observation_space, action_space)
         self.model = model.to(device)
         self.model_target = no_grad(deepcopy(self.model))
@@ -67,6 +72,7 @@ class Agent(rlrd.sac.Agent):
         # nstep_len will be e.g. 0 in the rtrl setting (an action delay of 0 here means an action delay of 1 in the paper).
 
         int_tens_type = obs_del = augm_obs_traj[0][2].dtype
+
         ones_tens = torch.ones(batch_size, device=self.device, dtype=int_tens_type, requires_grad=False)
 
         if not self.rtac:

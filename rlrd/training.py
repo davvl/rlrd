@@ -22,8 +22,8 @@ class Training:
     Env: type = GymEnv
     Test: type = Test
     Agent: type = rlrd.sac.Agent
-    epochs: int = 10  # total number of epochs, we save the agent every epoch
-    rounds: int = 50  # number of rounds per epoch, we generate statistics every round
+    epochs: int = 2 #10 # total number of epochs, we save the agent every epoch
+    rounds: int = 3 #50  # number of rounds per epoch, we generate statistics every round
     steps: int = 2000  # number of steps per round, one step = environment step
     stats_window: int = None  # default = steps, should be at least as long as a single episode
     seed: int = 0  # seed is currently not used

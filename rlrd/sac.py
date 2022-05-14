@@ -38,7 +38,9 @@ class Agent:
     def __post_init__(self, Env):
         with Env() as env:
             observation_space, action_space = env.observation_space, env.action_space
-        device = self.device or ("cuda" if torch.cuda.is_available() else "cpu")
+        device = ("cuda" if torch.cuda.is_available() else "cpu")
+        print('dd self.device={}, device={}'.format(self.device, device))
+
         model = self.Model(observation_space, action_space)
         self.model = model.to(device)
         self.model_target = no_grad(deepcopy(self.model))
